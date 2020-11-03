@@ -24,7 +24,14 @@ app.use('/static', express.static(path.join(__dirname, '/static')));
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
 
 setInterval(() => {
-  io.sockets.emit('update', 'blue');
+  io.sockets.emit('update',
+    {
+      entities: [
+        {
+          id: 1, position: { x: 100, y: 100 }, sprite: '/static/img/torpedo.svg', width: 30, height: 30,
+        },
+      ],
+    });
 }, config.INTERVAL);
 
 server.listen(config.PORT, () => {

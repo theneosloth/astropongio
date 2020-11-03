@@ -16,6 +16,7 @@ class Entity {
     if (this.ready) {
       context.drawImage(this.sprite, this.position.x, this.position.y, this.width, this.height);
     } else {
+      context.fillStyle = "black";
       context.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
   }
