@@ -6,13 +6,14 @@ const morgan = require('morgan');
 const socketIO = require('socket.io');
 
 // Project files
-const config = require('./utils/config');
+const config = require('./shared/config');
+const Game = require('./server/game/game');
 
 const app = express();
 const server = http.Server(app);
 const io = socketIO(server);
 
-morgan('tiny');
+app.use(morgan('tiny'));
 
 app.set('port', config.PORT);
 
