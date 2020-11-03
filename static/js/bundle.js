@@ -1,1 +1,0 @@
-(()=>{var e=io(),t=document.querySelector("canvas").getContext("2d");e.on("message",(function(e){t.fillText(e,400,300)}))})();

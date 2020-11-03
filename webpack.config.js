@@ -1,7 +1,8 @@
 const path = require('path');
 
 module.exports = {
-  entry: './client/game.js',
+  mode: 'none',
+  entry: './client/main.js',
   module: {
     rules: [
       {

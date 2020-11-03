@@ -24,7 +24,7 @@ app.use('/static', express.static(path.join(__dirname, '/static')));
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
 
 setInterval(() => {
-  io.sockets.emit('message', 'hi!');
+  io.sockets.emit('update', 'blue');
 }, config.INTERVAL);
 
 server.listen(config.PORT, () => {

@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production node app.js",
-    "dev": "cross-env NODE_ENV=development  npm-run-all watch:client watch:server",
-    "watch:client" : "webpack --watch",
-    "watch:server" : "nodemon app.js",
+    "start": "npm run build && node app.js",
+    "dev": "nodemon app.js",
+    "watch:client": "webpack --watch",
+    "watch:server": "nodemon app.js",
     "build": "webpack"
   },
   "keywords": [
@@ -17,8 +17,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "cross-env": "^7.0.2",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
