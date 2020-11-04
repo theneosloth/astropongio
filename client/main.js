@@ -13,6 +13,3 @@ socket.on('update', (data) => {
 socket.on('disconnect', () => {
   g.disconnect();
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-});

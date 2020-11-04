@@ -1,8 +1,8 @@
-const config = require('../../shared/config');
+const Ball = require('../../shared/entity/ball');
 
 class Game {
   constructor() {
-    this.entities = new Map();
+    this.entities = [new Ball()];
   }
 }
 

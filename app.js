@@ -24,14 +24,15 @@ app.get('/', (request, response) => {
 app.use('/static', express.static(path.join(__dirname, '/static')));
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
 
+const g = new Game();
+
 setInterval(() => {
+  g.entities.forEach((e) => {
+    e.update();
+  });
   io.sockets.emit('update',
     {
-      entities: [
-        {
-          id: 1, position: { x: 100, y: 100 }, sprite: '/static/img/torpedo.svg', width: 30, height: 30,
-        },
-      ],
+      entities: g.entities,
     });
 }, config.INTERVAL);
 
