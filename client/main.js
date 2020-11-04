@@ -5,6 +5,7 @@ const socket = io();
 const ctx = document.querySelector('canvas').getContext('2d');
 
 const g = new Game(socket, ctx);
+g.localUpdate();
 socket.on('update', (data) => {
   g.updateState(data);
   g.drawAll();

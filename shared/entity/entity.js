@@ -1,5 +1,4 @@
 class Entity {
-  // [x,y] pairs
   constructor(id, position, sprite, width, height) {
     this.id = id;
     this.position = position;
@@ -11,9 +10,9 @@ class Entity {
     this.rotation = 0;
   }
 
-  update() {
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
+  update(dt) {
+    this.position.x += this.velocity.x * dt;
+    this.position.y += this.velocity.y * dt;
   }
 }
 

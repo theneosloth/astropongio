@@ -24,16 +24,10 @@ app.get('/', (request, response) => {
 app.use('/static', express.static(path.join(__dirname, '/static')));
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
 
-const g = new Game();
+const g = new Game(io);
 
 setInterval(() => {
-  g.entities.forEach((e) => {
-    e.update();
-  });
-  io.sockets.emit('update',
-    {
-      entities: g.entities,
-    });
+  g.update();
 }, config.INTERVAL);
 
 server.listen(config.PORT, () => {

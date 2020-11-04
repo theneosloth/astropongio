@@ -13,13 +13,17 @@ class Game {
     this.entities.set(0, new Ball());
     this.draw = new Draw(context);
     this.input = new Input();
+    this.lastUpdateTime = Date.now();
+    this.animationFrameHandle = undefined;
   }
 
   updateState(newState) {
     newState.entities.forEach((e) => {
       if (this.entities.has(e.id)) {
         // Server result
-        this.entities.get(e.id).position = e.position;
+        const currEnt = this.entities.get(e.id);
+        currEnt.position = e.position;
+        currEnt.velocity = e.velocity;
       } else {
         this.entities.set(e.id, new Entity(e.id, e.position, e.sprite, e.width, e.height));
       }
@@ -27,11 +31,15 @@ class Game {
   }
 
   localUpdate() {
+    const currentUpdateTime = Date.now();
+    const deltaTime = (currentUpdateTime - this.lastUpdateTime) / 1000;
     this.entities.forEach((e) => {
-      e.update();
+      e.update(deltaTime);
     });
+    this.lastUpdateTime = currentUpdateTime;
+
     this.drawAll();
-    window.requestAnimationFrame(this.localUpdate.bind(this));
+    this.animationFrameHandle = window.requestAnimationFrame(this.localUpdate.bind(this));
   }
 
   drawAll() {
@@ -41,6 +49,7 @@ class Game {
   }
 
   disconnect() {
+    window.cancelAnimationFrame(this.animationFrameHandle);
     this.context.clearRect(0, 0, config.WIDTH, config.HEIGHT);
     this.context.fillStyle = 'black';
     this.context.fillRect(0, 0, config.WIDTH, config.HEIGHT);

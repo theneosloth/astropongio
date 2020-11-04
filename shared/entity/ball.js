@@ -6,24 +6,36 @@ const { WIDTH, HEIGHT } = config;
 
 class Ball extends Entity {
   constructor() {
-    super(0, { x: WIDTH / 2, y: HEIGHT / 2 }, '/static/img/ufo.svg', 50, 50);
-    this.velocity.y = 3;
+    super(0, { x: 110, y: 110 }, '/static/img/ufo.svg', 50, 50);
+    this.velocity.y = 100;
+    this.velocity.x = 300;
   }
 
-  update() {
-    super.update();
-
+  update(dt) {
+    super.update(dt);
     //speeeeeen
-    this.rotation += 5;
+    this.rotation += 100 * dt;
     this.rotation %= 360;
 
     //bounce
-    if (this.position.x + this.width / 2 >= WIDTH || this.position.x - this.width / 2 < 0) {
+    if (this.position.x + this.width / 2 > WIDTH) {
       this.velocity.x *= -1;
+      this.position.x = WIDTH - this.width / 2;
     }
 
-    if (this.position.y + this.height / 2 >= HEIGHT || this.position.y - this.height / 2 < 0) {
+    if (this.position.x - this.width / 2 < 0) {
+      this.velocity.x *= -1;
+      this.position.x = this.width / 2;
+    }
+
+    if (this.position.y + this.height / 2 > HEIGHT) {
       this.velocity.y *= -1;
+      this.position.y = HEIGHT - this.height / 2;
+    }
+
+    if (this.position.y - this.height / 2 < 0) {
+      this.velocity.y *= -1;
+      this.position.y = this.height / 2;
     }
   }
 }
