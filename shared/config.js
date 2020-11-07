@@ -1,5 +1,5 @@
 const PORT = 3003;
-const INTERVAL = 1000 / 60;
+const INTERVAL = 1000 / 30;
 const WIDTH = 1200;
 const HEIGHT = 800;
 

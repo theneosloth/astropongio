@@ -7,6 +7,17 @@ class Game {
     this.socket = socket;
   }
 
+  init() {
+    this.socket.on('connection', (socket) => {
+      console.log('A user connected.');
+      socket.on('disconnect', () => {
+        console.log('A user disconnected.')
+      })
+    });
+
+
+  }
+
   update() {
     const currentUpdateTime = Date.now();
     const deltaTime = (currentUpdateTime - this.lastUpdateTime) / 1000;

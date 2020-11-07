@@ -25,6 +25,7 @@ app.use('/static', express.static(path.join(__dirname, '/static')));
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
 
 const g = new Game(io);
+g.init();
 
 setInterval(() => {
   g.update();

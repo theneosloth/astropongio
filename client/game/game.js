@@ -33,10 +33,13 @@ class Game {
   localUpdate() {
     const currentUpdateTime = Date.now();
     const deltaTime = (currentUpdateTime - this.lastUpdateTime) / 1000;
+    this.lastUpdateTime = currentUpdateTime;
+
+    this.socket.emit('inputs', this.input.keys);
+
     this.entities.forEach((e) => {
       e.update(deltaTime);
     });
-    this.lastUpdateTime = currentUpdateTime;
 
     this.drawAll();
     this.animationFrameHandle = window.requestAnimationFrame(this.localUpdate.bind(this));
